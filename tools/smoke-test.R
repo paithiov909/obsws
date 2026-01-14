@@ -7,9 +7,11 @@ pkgload::load_all(export_all = FALSE)
 dotenv::load_dot_env(".env")
 
 data(ReqType)
+data(EventSub)
 
 client <- Client$new(url = paste0("ws://", Sys.getenv("OBS_HOST"), ":4455"))
 client$connect(password = Sys.getenv("OBS_PASSWORD"))
+client$reidentify(bitwOr(EventSub$General, EventSub$Ui))
 
 if (client$current_state() == "identified") {
   req_id <- client$emit(ReqType$GetVersion, NULL)

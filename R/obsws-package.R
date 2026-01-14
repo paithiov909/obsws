@@ -188,9 +188,13 @@ Client <- R6::R6Class( #nolint
       msg <-
         to_json(list(
           op = 3,
-          d = list(
-            eventSubscriptions = as.integer(subscriptions)
-          )
+          d = if (is.null(subscriptions)) {
+            NULL
+          } else {
+            list(
+              eventSubscriptions = as.integer(subscriptions)
+            )
+          }
         ))
       private$ws$send(msg)
       invisible(self)

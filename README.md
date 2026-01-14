@@ -31,9 +31,11 @@ pkgload::load_all(export_all = FALSE)
 dotenv::load_dot_env(".env")
 
 data(ReqType)
+data(EventSub)
 
 client <- Client$new(url = paste0("ws://", Sys.getenv("OBS_HOST"), ":4455"))
 client$connect(password = Sys.getenv("OBS_PASSWORD"))
+client$reidentify(bitwOr(EventSub$General, EventSub$Ui))
 
 if (client$current_state() == "identified") {
   req_id <- client$emit(ReqType$GetVersion, NULL)
@@ -57,7 +59,7 @@ d <- readRDS("tools/obs_get-version.rds")
 str(d)
 #> List of 1
 #>  $ :List of 4
-#>   ..$ requestId    : chr "wTkIFhDEpQEA-000000001"
+#>   ..$ requestId    : chr "ICR8aaPFEQZE-000000001"
 #>   ..$ requestStatus:List of 2
 #>   .. ..$ code  : int 100
 #>   .. ..$ result: logi TRUE
