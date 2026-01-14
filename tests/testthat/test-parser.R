@@ -96,6 +96,16 @@ test_that("parse_data works", {
   )
 })
 
+test_that("parse_event_type works", {
+  expect_snapshot_value(
+    parse_event_type(messages),
+    style = "json2",
+    cran = FALSE
+  )
+  expect_type(parse_event_type(messages), "character")
+  expect_type(parse_event_type(messages[1]), "character")
+})
+
 test_that("parse_request_id works", {
   expect_snapshot_value(
     parse_request_id(messages),
@@ -106,22 +116,12 @@ test_that("parse_request_id works", {
   expect_type(parse_request_id(messages[1]), "character")
 })
 
-# test_that("parse_request_type works", {
-#   expect_snapshot_value(
-#     parse_request_type(messages),
-#     style = "json2",
-#     cran = FALSE
-#   )
-#   expect_type(parse_request_type(messages), "character")
-#   expect_type(parse_request_type(messages[1]), "character")
-# })
-
-test_that("parse_event_type works", {
+test_that("parse_result works", {
   expect_snapshot_value(
-    parse_event_type(messages),
+    parse_result(messages),
     style = "json2",
     cran = FALSE
   )
-  expect_type(parse_event_type(messages), "character")
-  expect_type(parse_event_type(messages[1]), "character")
+  expect_type(parse_result(messages), "logical")
+  expect_type(parse_result(messages[1]), "logical")
 })

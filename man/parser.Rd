@@ -6,6 +6,8 @@
 \alias{parse_op}
 \alias{parse_data}
 \alias{parse_event_type}
+\alias{parse_request_id}
+\alias{parse_result}
 \title{Parse messages from the OBS WebSocket server}
 \usage{
 parse_message(jsonl, only)
@@ -15,12 +17,16 @@ parse_op(jsonl, only)
 parse_data(jsonl, only, query = "/d")
 
 parse_event_type(jsonl, only)
+
+parse_request_id(jsonl, only)
+
+parse_result(jsonl, only)
 }
 \arguments{
 \item{jsonl}{A character vector of JSON messages.}
 
 \item{only}{Indices of messages to parse.
-If missing, all messages are parsed.}
+If missing, all messages in \code{jsonl} are parsed.}
 
 \item{query}{Query to be passed to \code{\link[RcppSimdJson:fparse]{RcppSimdJson::fparse()}}.
 Defaults to \code{"/d"}.}
@@ -30,8 +36,9 @@ Defaults to \code{"/d"}.}
 \item For \code{parse_message()}, a list of parsed messages.
 \item For \code{parse_op()}, an integer vector of parsed '/op' fields.
 \item For \code{parse_data()}, a list of parsed fields.
-\item For \code{parse_request_id()}, a character vector of parsed '/d/requestId' fields.
 \item For \code{parse_event_type()}, a character vector of parsed '/d/eventType' fields.
+\item For \code{parse_request_id()}, a character vector of parsed '/d/requestId' fields.
+\item For \code{parse_result()}, a logical vector of parsed '/d/requestStatus/result' fields.
 }
 }
 \description{

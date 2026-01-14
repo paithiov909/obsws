@@ -19,5 +19,5 @@ until a timeout is reached.
 This is useful for forcing to update the message queue of a client.
 Since the message queue is updated asynchronously
 within an event loop of the \link[later:later]{later::later} package,
-you need to update the queue manually where the R session doesn't get idle.
+you need to update the queue manually where the R session keeps busy.
 }

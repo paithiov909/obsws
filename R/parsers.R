@@ -6,15 +6,16 @@
 #'
 #' @param jsonl A character vector of JSON messages.
 #' @param only Indices of messages to parse.
-#'  If missing, all messages are parsed.
+#'  If missing, all messages in `jsonl` are parsed.
 #' @param query Query to be passed to [RcppSimdJson::fparse()].
 #'  Defaults to `"/d"`.
 #' @returns
 #'  * For `parse_message()`, a list of parsed messages.
 #'  * For `parse_op()`, an integer vector of parsed '/op' fields.
 #'  * For `parse_data()`, a list of parsed fields.
-#'  * For `parse_request_id()`, a character vector of parsed '/d/requestId' fields.
 #'  * For `parse_event_type()`, a character vector of parsed '/d/eventType' fields.
+#'  * For `parse_request_id()`, a character vector of parsed '/d/requestId' fields.
+#'  * For `parse_result()`, a logical vector of parsed '/d/requestStatus/result' fields.
 #' @rdname parser
 #' @name parser
 NULL
@@ -68,6 +69,28 @@ parse_data <- function(jsonl, only, query = "/d") {
   )
 }
 
+#' @rdname parser
+#' @export
+parse_event_type <- function(jsonl, only) {
+  if (!missing(only)) {
+    jsonl <- jsonl[only]
+  }
+  ret <- RcppSimdJson::fparse(
+    jsonl,
+    query = "/d/eventType",
+    query_error_ok = TRUE,
+    on_query_error = NA_character_,
+    parse_error_ok = TRUE,
+    on_parse_error = NA_character_,
+    max_simplify_lvl = "vector",
+    type_policy = "strict",
+    always_list = TRUE
+  )
+  # character
+  unlist(ret, use.names = FALSE)
+}
+
+#' @rdname parser
 #' @export
 parse_request_id <- function(jsonl, only) {
   if (!missing(only)) {
@@ -88,42 +111,23 @@ parse_request_id <- function(jsonl, only) {
   unlist(ret, use.names = FALSE)
 }
 
-# parse_request_type <- function(jsonl, only) {
-#   if (!missing(only)) {
-#     jsonl <- jsonl[only]
-#   }
-#   ret <- RcppSimdJson::fparse(
-#     jsonl,
-#     query = "/d/requestType",
-#     query_error_ok = TRUE,
-#     on_query_error = NA_character_,
-#     parse_error_ok = TRUE,
-#     on_parse_error = NA_character_,
-#     max_simplify_lvl = "vector",
-#     type_policy = "strict",
-#     always_list = TRUE
-#   )
-#   # character
-#   unlist(ret, use.names = FALSE)
-# }
-
 #' @rdname parser
 #' @export
-parse_event_type <- function(jsonl, only) {
+parse_result <- function(jsonl, only) {
   if (!missing(only)) {
     jsonl <- jsonl[only]
   }
   ret <- RcppSimdJson::fparse(
     jsonl,
-    query = "/d/eventType",
+    query = "/d/requestStatus/result",
     query_error_ok = TRUE,
-    on_query_error = NA_character_,
+    on_query_error = NA,
     parse_error_ok = TRUE,
-    on_parse_error = NA_character_,
+    on_parse_error = NA,
     max_simplify_lvl = "vector",
     type_policy = "strict",
     always_list = TRUE
   )
-  # character
+  # logical
   unlist(ret, use.names = FALSE)
 }

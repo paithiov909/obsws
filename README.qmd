@@ -1,0 +1,45 @@
+---
+title: obsws
+format: gfm
+fig-width: 8
+fig-height: 4.5
+knitr:
+  opts_chunk:
+    dev: "ragg_jpeg"
+    collapse: true
+    comment: "#>"
+    fig.path: "man/figures/README-"
+    out.width: "100%"
+---
+
+<!-- README.md is generated from README.qmd. Please edit that file -->
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+<!-- badges: end -->
+
+A simple client for the [OBS WebSocket server](https://github.com/obsproject/obs-websocket)
+based on [R6](https://r6.r-lib.org/) and [websocket](https://github.com/rstudio/websocket) packages.
+
+## Usage
+
+```{r}
+pkgload::load_all(export_all = FALSE)
+data(ReqType)
+
+client <- Client$new(url = "ws://localhost:4455")
+on.exit(client$disconnect(reset = TRUE))
+
+# password
+client$connect()
+
+if (client$current_state() == "identified") {
+  req_id <- client$emit(ReqType$GetVersion, NULL)
+  resp <- waiter_for_response(10)(client, req_id)
+  parse_data(resp)
+}
+```
+
+## License
+
+MIT License.

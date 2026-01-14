@@ -7,7 +7,7 @@
 #' This is useful for forcing to update the message queue of a client.
 #' Since the message queue is updated asynchronously
 #' within an event loop of the [later] package,
-#' you need to update the queue manually where the R session doesn't get idle.
+#' you need to update the queue manually where the R session keeps busy.
 #'
 #' @param timeout Maximum time to wait for messages.
 #' @returns Called for side effects.
@@ -31,7 +31,7 @@ wait_for_messages <- function(timeout = 1) {
 #' @param error_on_timeout Whether to throw an error if no response is received.
 #' @returns
 #'  A function that takes a `Client` and request ID as arguments
-#'  and returns the index of the response message in the queue.
+#'  and returns the response message as a JSON string from the queue.
 #' @export
 waiter_for_response <- function(
   max_retries = 10,
@@ -45,13 +45,13 @@ waiter_for_response <- function(
       if (!rlang::is_empty(events)) {
         request <- parse_request_id(events) == request_id
         if (any(request)) {
-          return(which(request))
+          return(events[request])
         }
       }
     }
     if (error_on_timeout) {
       cli::cli_abort("Could not get any responses for request {request_id}")
     }
-    NA
+    NA_character_
   }
 }

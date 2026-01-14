@@ -801,6 +801,14 @@
       ]
     }
 
+# parse_event_type works
+
+    {
+      "type": "character",
+      "attributes": {},
+      "value": [null, null, null, "StudioModeStateChanged", null, null, null]
+    }
+
 # parse_request_id works
 
     {
@@ -809,11 +817,11 @@
       "value": [null, null, null, null, "f819dcf0-89cc-11eb-8f0e-382c4ac93b9c", "f819dcf0-89cc-11eb-8f0e-382c4ac93b9c", "f819dcf0-89cc-11eb-8f0e-382c4ac93b9c"]
     }
 
-# parse_event_type works
+# parse_result works
 
     {
-      "type": "character",
+      "type": "logical",
       "attributes": {},
-      "value": [null, null, null, "StudioModeStateChanged", null, null, null]
+      "value": [null, null, null, null, true, false, false]
     }
 

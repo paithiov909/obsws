@@ -6,10 +6,6 @@ as_state <- function(x) {
   )
 }
 
-as_tibble <- function(x) {
-  structure(x, class = c("tbl_df", "tbl", "data.frame"))
-}
-
 #' Solve authentication challenge
 #'
 #' @param auth_field Authentication field

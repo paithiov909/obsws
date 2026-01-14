@@ -15,7 +15,7 @@ waiter_for_response(max_retries = 10, interval = 1, error_on_timeout = TRUE)
 }
 \value{
 A function that takes a \code{Client} and request ID as arguments
-and returns the index of the response message in the queue.
+and returns the response message as a JSON string from the queue.
 }
 \description{
 Generate waiter for RequestResponse messages
