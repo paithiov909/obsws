@@ -18,6 +18,7 @@ See \href{https://github.com/obsproject/obs-websocket/blob/master/docs/generated
 }
 \seealso{
 Other obsws-data: 
+\code{\link{EventSub}},
 \code{\link{ReqType}},
 \code{\link{obs_events}},
 \code{\link{obs_requests}}

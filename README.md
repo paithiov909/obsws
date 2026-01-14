@@ -9,7 +9,7 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-A simple client for the [OBS WebSocket
+A simple R client for the [OBS WebSocket
 server](https://github.com/obsproject/obs-websocket) based on
 [R6](https://r6.r-lib.org/) and
 [websocket](https://github.com/rstudio/websocket) packages.
@@ -42,7 +42,7 @@ if (client$current_state() == "identified") {
 }
 
 if (!is.null(d)) {
-  saveRDS(d, file = "inst/extdata/obs_get-version.rds")
+  saveRDS(d, file = "tools/obs_get-version.rds")
 }
 
 client$disconnect(reset = TRUE)
@@ -53,7 +53,7 @@ This `d` object is a parsed response to the ‘GetVersion’ request. It is
 something like this:
 
 ``` r
-d <- readRDS("inst/extdata/obs_get-version.rds")
+d <- readRDS("tools/obs_get-version.rds")
 str(d)
 #> List of 1
 #>  $ :List of 4

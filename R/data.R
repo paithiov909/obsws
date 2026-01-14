@@ -32,11 +32,11 @@
 #' @family obsws-data
 "ReqType"
 
-# use_request_type <- function(env = parent.frame()) {
-#   assign(
-#     "reqtype",
-#     rlang::as_environment(obs_reqtype),  #nolint
-#     envir = env
-#   )
-#   invisible(NULL)
-# }
+#' OBS WebSocket event subscription bitmasks
+#'
+#' A named list of integer bitmask values for event subscriptions
+#' used by obs-websocket (version 5.x).
+#' @source
+#' <https://github.com/obsproject/obs-websocket/blob/master/docs/generated/protocol.json>
+#' @family obsws-data
+"EventSub"
