@@ -1,1 +1,7 @@
 .Rproj.user
+.env
+
+/.quarto/
+**/*.quarto_ipynb
+
+/_*.local

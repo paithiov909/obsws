@@ -45,7 +45,8 @@ waiter_for_response <- function(
       if (!rlang::is_empty(events)) {
         request <- parse_request_id(events) == request_id
         if (any(request)) {
-          return(events[request])
+          target <- events[request]
+          return(target[!is.na(target)])
         }
       }
     }

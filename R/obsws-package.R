@@ -66,13 +66,13 @@ Client <- R6::R6Class( #nolint
         wait_for_messages(interval)
       }
       if (self$current_state() != "connecting") {
-        cli::cli_abort("Client state is not connecting")
+        cli::cli_abort("Client state is {self$current_state()}; not connecting")
       }
 
       # Take Hello (OpCode 0) from queue
       msgs <- self$pluck(reset = FALSE)
       hello <- parse_op(msgs) == 0L
-      if (!any(hello)) {
+      if (rlang::is_empty(msgs) || !any(hello)) {
         cli::cli_abort("There are no Hello messages in queue")
       }
       hello_msgs <- parse_data(msgs, only = hello)
@@ -86,14 +86,14 @@ Client <- R6::R6Class( #nolint
               list(
                 op = 1,
                 d = list(
-                  rpcVersion = "1",
+                  rpcVersion = 1,
                   authentication = gen_auth(auth_field, password)
                 )
               )
             )
             private$ws$send(msg)
           } else {
-            msg <- to_json(list(op = 1, d = list(rpcVersion = "1")))
+            msg <- to_json(list(op = 1, d = list(rpcVersion = 1)))
             private$ws$send(msg)
           }
 
@@ -182,7 +182,7 @@ Client <- R6::R6Class( #nolint
     },
     #' @description
     #' Reidentifies with event subscriptions.
-    #' @param subscriptions An integer scalar;
+    #' @param subscriptions An integer scalar
     #'  representing event subscriptions bitmask.
     reidentify = function(subscriptions = NULL) {
       msg <-

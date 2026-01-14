@@ -5,14 +5,14 @@ fig-width: 8
 fig-height: 4.5
 knitr:
   opts_chunk:
-    dev: "ragg_jpeg"
+    dev: "jpeg"
     collapse: true
     comment: "#>"
     fig.path: "man/figures/README-"
     out.width: "100%"
 ---
 
-<!-- README.md is generated from README.qmd. Please edit that file -->
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
@@ -23,22 +23,23 @@ based on [R6](https://r6.r-lib.org/) and [websocket](https://github.com/rstudio/
 
 ## Usage
 
-```{r}
-pkgload::load_all(export_all = FALSE)
-data(ReqType)
+This package relies on the websocket package, which requires an
+interactive R session (or a running event loop).
+Code examples in this README are illustrative and may not run
+in non-interactive contexts such as RMarkdown or Quarto.
 
-client <- Client$new(url = "ws://localhost:4455")
-on.exit(client$disconnect(reset = TRUE))
-
-# password
-client$connect()
-
-if (client$current_state() == "identified") {
-  req_id <- client$emit(ReqType$GetVersion, NULL)
-  resp <- waiter_for_response(10)(client, req_id)
-  parse_data(resp)
-}
+```r
+{{< include "tools/smoke-test.R" >}}
 ```
+
+This `d` object is a parsed response to the 'GetVersion' request.
+It is something like this:
+
+```{r}
+d <- readRDS("inst/extdata/obs_get-version.rds")
+str(d)
+```
+
 
 ## License
 

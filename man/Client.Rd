@@ -154,7 +154,7 @@ Reidentifies with event subscriptions.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{subscriptions}}{An integer scalar;
+\item{\code{subscriptions}}{An integer scalar
 representing event subscriptions bitmask.}
 }
 \if{html}{\out{</div>}}
