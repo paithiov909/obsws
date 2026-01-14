@@ -152,7 +152,7 @@ Client <- R6::R6Class( #nolint
     #'  If missing, all messages are plucked.
     #' @param reset Whether to reset queue after pluck.
     #' @returns
-    #' `clients$pluck()` returns JSON strings representing recieved messages.
+    #' `client$pluck()` returns JSON strings representing recieved messages.
     pluck = function(only, reset = FALSE) {
       msgs <-
         unlist(private$queue$as_list(), use.names = FALSE) |>

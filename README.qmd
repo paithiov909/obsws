@@ -36,7 +36,7 @@ This `d` object is a parsed response to the 'GetVersion' request.
 It is something like this:
 
 ```{r}
-d <- readRDS("inst/extdata/obs_get-version.rds")
+d <- readRDS("tools/obs_get-version.rds")
 str(d)
 ```
 

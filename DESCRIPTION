@@ -1,9 +1,14 @@
 Package: obsws
-Title: What the Package Does (One Line, Title Case)
+Title: Minimal Client for 'OBS' WebSocket
 Version: 0.0.1
 Authors@R:
     person("Akiru", "Kato", , "paithiov909@gmail.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Description: A minimal R client for the 'OBS' WebSocket protocol
+    ('obs-websocket' 5.x, <https://github.com/obsproject/obs-websocket>).
+    This package provides low-level utilities to send requests and receive
+    messages as raw JSON strings via WebSocket connections.
+    It is designed for interactive use and does not attempt to abstract or
+    validate 'OBS' request semantics.
 License: MIT + file LICENSE
 Depends:
     R (>= 4.1)

@@ -6,7 +6,7 @@
 \value{
 \code{new(Client)} returns a new OBSClient object.
 
-\code{clients$pluck()} returns JSON strings representing recieved messages.
+\code{client$pluck()} returns JSON strings representing recieved messages.
 
 \code{client$emit()} returns corresponding request ID sent to OBS.
 

@@ -18,7 +18,7 @@ if (client$current_state() == "identified") {
 }
 
 if (!is.null(d)) {
-  saveRDS(d, file = "inst/extdata/obs_get-version.rds")
+  saveRDS(d, file = "tools/obs_get-version.rds")
 }
 
 client$disconnect(reset = TRUE)

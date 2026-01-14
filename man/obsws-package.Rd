@@ -4,9 +4,9 @@
 \name{obsws-package}
 \alias{obsws}
 \alias{obsws-package}
-\title{obsws: What the Package Does (One Line, Title Case)}
+\title{obsws: Minimal Client for 'OBS' WebSocket}
 \description{
-What the package does (one paragraph).
+A minimal R client for the 'OBS' WebSocket protocol ('obs-websocket' 5.x, \url{https://github.com/obsproject/obs-websocket}). This package provides low-level utilities to send requests and receive messages as raw JSON strings via WebSocket connections. It is designed for interactive use and does not attempt to abstract or validate 'OBS' request semantics.
 }
 \author{
 \strong{Maintainer}: Akiru Kato \email{paithiov909@gmail.com}
