@@ -60,7 +60,6 @@ Client <- R6::R6Class( #nolint
       interval = 1,
       verbose = TRUE
     ) {
-      # FIXME: connectingも取れるようにする
       if (self$current_state() == "fresh") {
         private$ws$connect()
         private$state <- as_state(2)
@@ -87,14 +86,14 @@ Client <- R6::R6Class( #nolint
               list(
                 op = 1,
                 d = list(
-                  rpcVersion = 1,
+                  rpcVersion = "1",
                   authentication = gen_auth(auth_field, password)
                 )
               )
             )
             private$ws$send(msg)
           } else {
-            msg <- to_json(list(op = 1, d = list(rpcVersion = 1)))
+            msg <- to_json(list(op = 1, d = list(rpcVersion = "1")))
             private$ws$send(msg)
           }
 
@@ -187,13 +186,13 @@ Client <- R6::R6Class( #nolint
     #'  representing event subscriptions bitmask.
     reidentify = function(subscriptions = NULL) {
       msg <-
-        to_json(
+        to_json(list(
           op = 3,
           d = list(
             eventSubscriptions = as.integer(subscriptions)
           )
-        )
-      self$emit(msg)
+        ))
+      private$ws$send(msg)
       invisible(self)
     },
     #' @description
