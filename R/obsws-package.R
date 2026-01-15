@@ -172,6 +172,9 @@ Client <- R6::R6Class( #nolint
     #' @returns
     #' `client$emit()` returns corresponding request ID sent to OBS.
     emit = function(type, data = NULL) {
+      if (self$current_state() != "identified") {
+        cli::cli_abort("Client state is {self$current_state()}; not identified")
+      }
       req_id <- private$gen_request_id()
       msg <- to_json(list(
         op = 6,
@@ -185,6 +188,9 @@ Client <- R6::R6Class( #nolint
     #' @param subscriptions An integer scalar
     #'  representing event subscriptions bitmask.
     reidentify = function(subscriptions = NULL) {
+      if (self$current_state() != "identified") {
+        cli::cli_abort("Client state is {self$current_state()}; not identified")
+      }
       msg <-
         to_json(list(
           op = 3,
